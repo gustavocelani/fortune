@@ -1,2 +1,4 @@
-# fortune
+# Fortune
+
 Finance Manager Android App
+
