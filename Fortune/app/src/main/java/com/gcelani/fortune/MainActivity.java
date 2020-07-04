@@ -11,7 +11,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
+import com.gcelani.fortune.database.AppDatabase;
+import com.gcelani.fortune.utils.Constants;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -22,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     /** AppBarConfiguration */
     private AppBarConfiguration mAppBarConfiguration;
+
+    /** AppDatabase */
+    private AppDatabase mAppDatabase;
 
     /**
      * onCreate
@@ -50,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+         mAppDatabase = Room.databaseBuilder(this, AppDatabase.class, Constants.DB_NAME).allowMainThreadQueries().build();
+         // Usage: ((MainActivity) getActivity()).getAppDatabase().accountDao().insertAll(account);
     }
 
     /**
@@ -71,5 +80,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
+    }
+
+    /**
+     * getAppDatabase
+     * @return appDatabase
+     */
+    public AppDatabase getAppDatabase() {
+        return mAppDatabase;
     }
 }

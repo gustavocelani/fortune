@@ -36,12 +36,7 @@ public class AccountsFragment extends Fragment {
         if (getActivity() != null) {
             FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab);
             floatingActionButton.setVisibility(View.VISIBLE);
-            floatingActionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "ACCOUNTS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
-            });
+            floatingActionButton.setOnClickListener(floatingActionButtonOnClickListener);
         }
 
         return rootView;
@@ -57,4 +52,14 @@ public class AccountsFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         menu.findItem(R.id.action_filter).setVisible(false);
     }
+
+    /**
+     * floatingActionButtonOnClickListener
+     */
+    private View.OnClickListener floatingActionButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view, "ACCOUNTS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+    };
 }
