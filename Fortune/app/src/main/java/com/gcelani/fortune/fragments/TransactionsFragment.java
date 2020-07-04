@@ -66,14 +66,14 @@ public class TransactionsFragment extends Fragment {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
-
         if (item.getItemId() == R.id.action_filter) {
             if (getView() != null) {
                 Snackbar.make(getView(), "FILTER ACTION", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
+
+            return true;
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }
