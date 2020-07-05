@@ -35,8 +35,8 @@ public class AccountsFragment extends Fragment {
 
         if (getActivity() != null) {
             FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab);
-            floatingActionButton.setVisibility(View.VISIBLE);
-            floatingActionButton.setOnClickListener(floatingActionButtonOnClickListener);
+            floatingActionButton.show();
+            floatingActionButton.setOnClickListener(fabMainOnClickListener);
         }
 
         return rootView;
@@ -54,12 +54,12 @@ public class AccountsFragment extends Fragment {
     }
 
     /**
-     * floatingActionButtonOnClickListener
+     * fabMainOnClickListener
      */
-    private View.OnClickListener floatingActionButtonOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener fabMainOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "ACCOUNTS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Snackbar.make(view, "ACCOUNT", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         }
     };
 }

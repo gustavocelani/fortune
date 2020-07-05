@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gcelani.fortune.R;
+import com.gcelani.fortune.view.ViewAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,6 +22,18 @@ import com.google.android.material.snackbar.Snackbar;
  * extends Fragment
  */
 public class TransactionsFragment extends Fragment {
+
+    /** isFabRotate */
+    private boolean isFabRotate = false;
+    /** FabMain */
+    private FloatingActionButton mFabMain;
+
+    /** FabRevenue */
+    private FloatingActionButton mFabRevenue;
+    /** FabExpense */
+    private FloatingActionButton mFabExpense;
+    /** FabTransaction */
+    private FloatingActionButton mFabTransaction;
 
     /**
      * onCreateView
@@ -35,9 +48,21 @@ public class TransactionsFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (getActivity() != null) {
-            FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab);
-            floatingActionButton.setVisibility(View.VISIBLE);
-            floatingActionButton.setOnClickListener(floatingActionButtonOnClickListener);
+            mFabRevenue = getActivity().findViewById(R.id.fab_revenue);
+            mFabRevenue.setOnClickListener(fabRevenueOnClickListener);
+            ViewAnimation.init(mFabRevenue);
+
+            mFabExpense = getActivity().findViewById(R.id.fab_expense);
+            mFabExpense.setOnClickListener(fabExpenseOnClickListener);
+            ViewAnimation.init(mFabExpense);
+
+            mFabTransaction = getActivity().findViewById(R.id.fab_transaction);
+            mFabTransaction.setOnClickListener(fabTransactionOnClickListener);
+            ViewAnimation.init(mFabTransaction);
+
+            mFabMain = getActivity().findViewById(R.id.fab);
+            mFabMain.show();
+            mFabMain.setOnClickListener(fabMainOnClickListener);
         }
 
         return rootView;
@@ -73,12 +98,65 @@ public class TransactionsFragment extends Fragment {
     }
 
     /**
-     * floatingActionButtonOnClickListener
+     * fabMainOnClickListener
      */
-    private View.OnClickListener floatingActionButtonOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener fabMainOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "TRANSACTIONS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            isFabRotate = ViewAnimation.rotateFab(view, !isFabRotate);
+            if(isFabRotate){
+                ViewAnimation.showIn(mFabRevenue);
+                ViewAnimation.showIn(mFabExpense);
+                ViewAnimation.showIn(mFabTransaction);
+            }else{
+                ViewAnimation.showOut(mFabRevenue);
+                ViewAnimation.showOut(mFabExpense);
+                ViewAnimation.showOut(mFabTransaction);
+            }
         }
     };
+
+    /**
+     * fabRevenueOnClickListener
+     */
+    private View.OnClickListener fabRevenueOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view, "Revenue", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+    };
+
+    /**
+     * fabExpenseOnClickListener
+     */
+    private View.OnClickListener fabExpenseOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view, "Expense", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+    };
+
+    /**
+     * fabTransactionOnClickListener
+     */
+    private View.OnClickListener fabTransactionOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view, "Transaction", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+    };
+
+    /**
+     * onDetach
+     */
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (isFabRotate) {
+            isFabRotate = ViewAnimation.rotateFab(mFabMain, false);
+            ViewAnimation.showOut(mFabRevenue);
+            ViewAnimation.showOut(mFabExpense);
+            ViewAnimation.showOut(mFabTransaction);
+        }
+    }
 }

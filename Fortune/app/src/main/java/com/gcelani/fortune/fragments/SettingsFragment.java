@@ -34,7 +34,7 @@ public class SettingsFragment extends Fragment {
 
         if (getActivity() != null) {
             FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab);
-            floatingActionButton.setVisibility(View.INVISIBLE);
+            floatingActionButton.hide();
         }
 
         return rootView;

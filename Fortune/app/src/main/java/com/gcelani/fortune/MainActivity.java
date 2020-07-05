@@ -15,6 +15,7 @@ import androidx.room.Room;
 
 import com.gcelani.fortune.database.AppDatabase;
 import com.gcelani.fortune.utils.Constants;
+import com.gcelani.fortune.view.ViewAnimation;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ViewAnimation.init(findViewById(R.id.fab_revenue));
+        ViewAnimation.init(findViewById(R.id.fab_expense));
+        ViewAnimation.init(findViewById(R.id.fab_transaction));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         mAppBarConfiguration = new AppBarConfiguration.Builder(

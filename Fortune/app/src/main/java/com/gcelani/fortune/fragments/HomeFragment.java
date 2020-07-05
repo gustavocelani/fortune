@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gcelani.fortune.R;
+import com.gcelani.fortune.view.ViewAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -34,7 +35,7 @@ public class HomeFragment extends Fragment {
 
         if (getActivity() != null) {
             FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab);
-            floatingActionButton.setVisibility(View.INVISIBLE);
+            floatingActionButton.hide();
         }
 
         return rootView;
