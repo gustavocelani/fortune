@@ -27,4 +27,9 @@
     <string name="about_owner_text">Developed and maintained by Gustavo Celani</string>
     <string name="about_owner_github_text">github.com/gustavocelani</string>
 
+    <!-- Transactions Operations -->
+    <string name="transaction_text">Transaction</string>
+    <string name="expense_text">Expense</string>
+    <string name="revenue_text">Revenue</string>
+
 </resources>

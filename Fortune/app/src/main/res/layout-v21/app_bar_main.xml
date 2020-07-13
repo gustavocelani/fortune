@@ -30,41 +30,83 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_transaction"
+        <LinearLayout
+            android:id="@+id/fab_transaction_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end|center"
-            android:layout_margin="@dimen/fab_margin"
-            android:backgroundTint="@color/purple"
-            app:fabSize="mini"
-            app:borderWidth="0dp"
-            app:srcCompat="@drawable/ic_fab_transaction"
-            tools:ignore="VectorDrawableCompat" />
+            android:layout_gravity="bottom|end|center" >
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_expense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end|center"
-            android:layout_margin="@dimen/fab_margin"
-            android:backgroundTint="@color/red"
-            app:fabSize="mini"
-            app:borderWidth="0dp"
-            app:srcCompat="@drawable/ic_fab_expense"
-            tools:ignore="VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/transaction_text" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_revenue"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end|center"
+                android:layout_margin="@dimen/fab_margin"
+                android:backgroundTint="@color/purple"
+                app:fabSize="mini"
+                app:borderWidth="0dp"
+                app:srcCompat="@drawable/ic_fab_transaction"
+                tools:ignore="VectorDrawableCompat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fab_expense_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end|center"
-            android:layout_margin="@dimen/fab_margin"
-            android:backgroundTint="@color/green"
-            app:fabSize="mini"
-            app:borderWidth="0dp"
-            app:srcCompat="@drawable/ic_fab_revenue"
-            tools:ignore="VectorDrawableCompat" />
+            android:layout_gravity="bottom|end|center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/expense_text" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end|center"
+                android:layout_margin="@dimen/fab_margin"
+                android:backgroundTint="@color/red"
+                app:fabSize="mini"
+                app:borderWidth="0dp"
+                app:srcCompat="@drawable/ic_fab_expense"
+                tools:ignore="VectorDrawableCompat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fab_revenue_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end|center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/revenue_text" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_revenue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end|center"
+                android:layout_margin="@dimen/fab_margin"
+                android:backgroundTint="@color/green"
+                app:fabSize="mini"
+                app:borderWidth="0dp"
+                app:srcCompat="@drawable/ic_fab_revenue"
+                tools:ignore="VectorDrawableCompat" />
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

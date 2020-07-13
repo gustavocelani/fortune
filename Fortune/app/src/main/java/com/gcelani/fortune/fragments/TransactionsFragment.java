@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,11 +30,11 @@ public class TransactionsFragment extends Fragment {
     private FloatingActionButton mFabMain;
 
     /** FabRevenue */
-    private FloatingActionButton mFabRevenue;
+    private LinearLayout mFabRevenueLayout;
     /** FabExpense */
-    private FloatingActionButton mFabExpense;
+    private LinearLayout mFabExpenseLayout;
     /** FabTransaction */
-    private FloatingActionButton mFabTransaction;
+    private LinearLayout mFabTransactionLayout;
 
     /**
      * onCreateView
@@ -48,17 +49,17 @@ public class TransactionsFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (getActivity() != null) {
-            mFabRevenue = getActivity().findViewById(R.id.fab_revenue);
-            mFabRevenue.setOnClickListener(fabRevenueOnClickListener);
-            ViewAnimation.init(mFabRevenue);
+            FloatingActionButton fabRevenue = getActivity().findViewById(R.id.fab_revenue);
+            fabRevenue.setOnClickListener(fabRevenueOnClickListener);
+            mFabRevenueLayout = getActivity().findViewById(R.id.fab_revenue_layout);
 
-            mFabExpense = getActivity().findViewById(R.id.fab_expense);
-            mFabExpense.setOnClickListener(fabExpenseOnClickListener);
-            ViewAnimation.init(mFabExpense);
+            FloatingActionButton fabExpense = getActivity().findViewById(R.id.fab_expense);
+            fabExpense.setOnClickListener(fabExpenseOnClickListener);
+            mFabExpenseLayout = getActivity().findViewById(R.id.fab_expense_layout);
 
-            mFabTransaction = getActivity().findViewById(R.id.fab_transaction);
-            mFabTransaction.setOnClickListener(fabTransactionOnClickListener);
-            ViewAnimation.init(mFabTransaction);
+            FloatingActionButton fabTransaction = getActivity().findViewById(R.id.fab_transaction);
+            fabTransaction.setOnClickListener(fabTransactionOnClickListener);
+            mFabTransactionLayout = getActivity().findViewById(R.id.fab_transaction_layout);
 
             mFabMain = getActivity().findViewById(R.id.fab);
             mFabMain.show();
@@ -104,14 +105,15 @@ public class TransactionsFragment extends Fragment {
         @Override
         public void onClick(View view) {
             isFabRotate = ViewAnimation.rotateFab(view, !isFabRotate);
-            if(isFabRotate){
-                ViewAnimation.showIn(mFabRevenue);
-                ViewAnimation.showIn(mFabExpense);
-                ViewAnimation.showIn(mFabTransaction);
-            }else{
-                ViewAnimation.showOut(mFabRevenue);
-                ViewAnimation.showOut(mFabExpense);
-                ViewAnimation.showOut(mFabTransaction);
+
+            if(isFabRotate) {
+                ViewAnimation.showIn(mFabRevenueLayout);
+                ViewAnimation.showIn(mFabExpenseLayout);
+                ViewAnimation.showIn(mFabTransactionLayout);
+            } else {
+                ViewAnimation.showOut(mFabRevenueLayout);
+                ViewAnimation.showOut(mFabExpenseLayout);
+                ViewAnimation.showOut(mFabTransactionLayout);
             }
         }
     };
@@ -147,16 +149,16 @@ public class TransactionsFragment extends Fragment {
     };
 
     /**
-     * onDetach
+     * onDestroyView
      */
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (isFabRotate) {
             isFabRotate = ViewAnimation.rotateFab(mFabMain, false);
-            ViewAnimation.showOut(mFabRevenue);
-            ViewAnimation.showOut(mFabExpense);
-            ViewAnimation.showOut(mFabTransaction);
+            ViewAnimation.showOut(mFabRevenueLayout);
+            ViewAnimation.showOut(mFabExpenseLayout);
+            ViewAnimation.showOut(mFabTransactionLayout);
         }
     }
 }

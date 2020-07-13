@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewAnimation.init(findViewById(R.id.fab_revenue));
-        ViewAnimation.init(findViewById(R.id.fab_expense));
-        ViewAnimation.init(findViewById(R.id.fab_transaction));
+        ViewAnimation.init(findViewById(R.id.fab_revenue_layout));
+        ViewAnimation.init(findViewById(R.id.fab_expense_layout));
+        ViewAnimation.init(findViewById(R.id.fab_transaction_layout));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
