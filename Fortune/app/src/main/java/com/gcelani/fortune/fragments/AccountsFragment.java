@@ -1,6 +1,7 @@
 package com.gcelani.fortune.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,9 +12,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.gcelani.fortune.AccountsActivity;
 import com.gcelani.fortune.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 /**
  * AccountsFragment
@@ -59,7 +60,8 @@ public class AccountsFragment extends Fragment {
     private View.OnClickListener fabMainOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "ACCOUNT", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Intent intent = new Intent(getActivity(), AccountsActivity.class);
+            startActivity(intent);
         }
     };
 }

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/default_horizontal_margin"
+        android:layout_marginTop="@dimen/default_vertical_margin"
+        android:layout_marginEnd="@dimen/default_horizontal_margin"
+        android:layout_marginBottom="@dimen/default_vertical_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_balance"
+            android:textColor="@color/light_gray"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/account_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="@dimen/giant_text_size"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            android:backgroundTintMode="src_over"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor"
+            android:importantForAutofill="no" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_horizontal_margin"
+                android:gravity="center"
+                android:text="@string/account_negative_balance"
+                android:textColor="@color/light_gray"
+                tools:ignore="MissingConstraints" />
+
+            <Switch
+                android:id="@+id/positive_balance_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_vertical_margin"
+                android:gravity="center"
+                android:text="@string/account_positive_balance"
+                android:textColor="@color/light_gray"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            android:text="@string/account_name"
+            android:textColor="@color/light_gray"
+            tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/account_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/mid_text_size"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:inputType="textCapWords"
+            android:autofillHints="@string/account_name_hint"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_type"
+            android:textColor="@color/light_gray"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            tools:ignore="MissingConstraints" />
+        <Spinner
+            android:id="@+id/account_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/mid_text_size"
+            android:layout_marginBottom="@dimen/default_vertical_margin" />
+
+        <CheckBox
+            android:id="@+id/account_is_available"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_gray"
+            android:textSize="@dimen/mid_text_size"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            android:text="@string/account_is_available" />
+        <CheckBox
+            android:id="@+id/account_is_investment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_gray"
+            android:textSize="@dimen/mid_text_size"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            android:text="@string/account_is_investment" />
+        <CheckBox
+            android:id="@+id/account_is_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_gray"
+            android:textSize="@dimen/mid_text_size"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            android:text="@string/account_is_total" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/account_explanation_text"
+            android:layout_gravity="bottom|center"
+            android:gravity="bottom|center"
+            android:textColor="@color/light_gray"
+            android:layout_margin="@dimen/default_horizontal_margin"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

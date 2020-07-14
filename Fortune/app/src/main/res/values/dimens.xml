@@ -1,14 +1,26 @@
 <resources>
 
+    <!-- Activity -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Default -->
+    <dimen name="default_horizontal_margin">16dp</dimen>
+    <dimen name="default_vertical_margin">16dp</dimen>
+
+    <!-- Navigation -->
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
 
+    <!-- Floating Action Button -->
     <dimen name="fab_margin">16dp</dimen>
 
+    <!-- About Fragment -->
     <dimen name="about_vertical_owner_margin">48dp</dimen>
 
+    <!-- Text -->
+    <dimen name="mid_text_size">18sp</dimen>
     <dimen name="big_text_size">22sp</dimen>
+    <dimen name="giant_text_size">42sp</dimen>
 
 </resources>

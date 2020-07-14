@@ -17,4 +17,28 @@ public class Account {
     /** Name */
     @ColumnInfo(name = "name")
     public String name;
+
+    /** Balance */
+    @ColumnInfo(name = "balance")
+    public double balance;
+
+    /** isPositiveBalance */
+    @ColumnInfo(name = "positiveBalance")
+    public boolean positiveBalance;
+
+    /** Type */
+    @ColumnInfo(name = "type")
+    public int type;
+
+    /** isInvestment */
+    @ColumnInfo(name = "investment")
+    public boolean investment;
+
+    /** isAvailable */
+    @ColumnInfo(name = "available")
+    public boolean available;
+
+    /** isTotal */
+    @ColumnInfo(name = "total")
+    public boolean total;
 }
