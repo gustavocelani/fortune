@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey;
 /**
  * Account
  */
-@Entity
+@Entity(tableName = "accounts")
 public class Account {
 
     /** UID */
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     /** Name */
@@ -28,7 +28,7 @@ public class Account {
 
     /** Type */
     @ColumnInfo(name = "type")
-    public int type;
+    public String type;
 
     /** isInvestment */
     @ColumnInfo(name = "investment")

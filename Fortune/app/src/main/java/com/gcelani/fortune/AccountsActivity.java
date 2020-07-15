@@ -16,8 +16,13 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.Room;
 
+import com.gcelani.fortune.database.AppDatabase;
+import com.gcelani.fortune.model.Account;
 import com.gcelani.fortune.utils.BalanceTextWatcher;
+import com.gcelani.fortune.utils.Constants;
+import com.gcelani.fortune.utils.Utils;
 
 /**
  * AccountActivity
@@ -40,6 +45,12 @@ public class AccountsActivity extends AppCompatActivity {
     /** IsTotalCheckBox */
     private CheckBox mIsTotalCheckBox;
 
+    /** AppDatabase */
+    private AppDatabase mAppDatabase;
+
+    /** EditingID */
+    private int mEditingId;
+
     /**
      * onCreate
      * @param savedInstanceState savedInstanceState
@@ -57,6 +68,9 @@ public class AccountsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        mAppDatabase = Room.databaseBuilder(this, AppDatabase.class, Constants.DB_NAME).allowMainThreadQueries().build();
+        mEditingId = Integer.MIN_VALUE;
 
         initializeUiElementsForNewAccount();
     }
@@ -105,6 +119,29 @@ public class AccountsActivity extends AppCompatActivity {
     };
 
     /**
+     * updateAccount
+     * Create Account object
+     * Save/Update Account object on DB
+     */
+    private void saveAccount() {
+        Account account = new Account();
+        if (isEditing()) {
+            account.id = mEditingId;
+        }
+
+        account.balance = Utils.parseMoneyStringToDouble(mBalanceEditText.getText().toString());
+        account.positiveBalance = mPositiveBalanceSwitch.isChecked();
+        account.name = mNameEditText.getText().toString();
+        account.type = mAccountTypeSpinner.getSelectedItem().toString();
+        account.available = mIsAvailableCheckBox.isChecked();
+        account.investment = mIsInvestmentCheckBox.isChecked();
+        account.total = mIsTotalCheckBox.isChecked();
+
+        mAppDatabase.accountDao().insertAll(account);
+        finish();
+    }
+
+    /**
      * onOptionsItemSelected
      * @param item item
      * @return Option result
@@ -117,6 +154,7 @@ public class AccountsActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_save:
+                saveAccount();
                 break;
 
             case R.id.action_delete:
@@ -138,5 +176,13 @@ public class AccountsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.accounts, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * isEditing
+     * @return True if is editing
+     */
+    private boolean isEditing() {
+        return mEditingId != Integer.MIN_VALUE;
     }
 }

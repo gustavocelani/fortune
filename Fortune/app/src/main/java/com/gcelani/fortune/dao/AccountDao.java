@@ -15,14 +15,14 @@ import java.util.List;
 @Dao
 public interface AccountDao {
 
-    @Query("SELECT * FROM account")
+    @Query("SELECT * FROM accounts")
     List<Account> getAll();
 
-    @Query("SELECT * FROM account WHERE id IN (:ids)")
+    @Query("SELECT * FROM accounts WHERE id IN (:ids)")
     List<Account> loadAllByIds(int[] ids);
 
-    @Query("SELECT * FROM account WHERE name LIKE :name LIMIT 1")
-    Account findByName(String name);
+    @Query("SELECT * FROM accounts WHERE id LIKE :id LIMIT 1")
+    Account findById(int id);
 
     @Insert
     void insertAll(Account... accounts);
