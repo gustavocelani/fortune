@@ -41,6 +41,7 @@
     <string name="account_is_total">Add to Total Group</string>
     <string name="account_name_hint">My Favorite Bank</string>
     <string name="account_delete_confirm_title">Delete Account</string>
+    <string name="account_invalid">Invalid Account</string>
     <string name="account_explanation_text">You can create as many accounts as you want\nAn account can be considered any means that you use to store your income</string>
     <string-array name="account_types">
         <item>Money</item>
@@ -60,8 +61,10 @@
     <string name="empty_accounts_message">Create your first account!\nStart to manage your finances!</string>
 
     <!-- Confirmation Messages -->
+    <string name="ok_text">OK</string>
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
     <string name="confirm_question">\nAre you sure?</string>
+    <string name="invalid_data_message">\nPlease, confirm the input fields info</string>
 
 </resources>

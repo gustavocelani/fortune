@@ -159,11 +159,29 @@ public class AccountsActivity extends AppCompatActivity {
 
         account.balance = Utils.parseMoneyStringToDouble(mBalanceEditText.getText().toString());
         account.positiveBalance = mPositiveBalanceSwitch.isChecked();
-        account.name = mNameEditText.getText().toString();
+        account.name = mNameEditText.getText().toString().trim();
         account.type = mAccountTypeSpinner.getSelectedItem().toString();
         account.availableGroup = mIsAvailableCheckBox.isChecked();
         account.investmentGroup = mIsInvestmentCheckBox.isChecked();
         account.totalGroup = mIsTotalCheckBox.isChecked();
+
+        if (!account.isValid()) {
+            final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_warning)
+                    .setTitle(getResources().getString(R.string.account_invalid))
+                    .setMessage(getResources().getString(R.string.invalid_data_message))
+                    .setPositiveButton(getResources().getString(R.string.ok_text), null)
+                    .create();
+            alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.white));
+                }
+            });
+
+            alertDialog.show();
+            return;
+        }
 
         if (isEditing()) {
             account.id = mEditingAccount.id;

@@ -45,4 +45,12 @@ public class Account implements Serializable {
     /** isTotal */
     @ColumnInfo(name = "isTotalGroup")
     public boolean totalGroup;
+
+    /**
+     * isValid
+     * @return True if isValid
+     */
+    public boolean isValid() {
+        return (name != null && !name.isEmpty() && name.length() <= Constants.ACCOUNT_NAME_MAX_LEN);
+    }
 }

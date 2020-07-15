@@ -14,4 +14,5 @@ public class Constants {
 
     /** Accounts */
     public static final String ACCOUNT_TAG = "account";
+    public static final    int ACCOUNT_NAME_MAX_LEN = 30;
 }
