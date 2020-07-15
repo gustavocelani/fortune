@@ -5,11 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import com.gcelani.fortune.R;
-
 import java.lang.ref.WeakReference;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * BalanceTextWatcher
@@ -50,22 +46,9 @@ public class BalanceTextWatcher implements TextWatcher {
             String formattedText = mCurrentText;
 
             if (s.toString().length() < 16) {
-                try {
-                    String cleanString = s.toString().replaceAll("[^\\d]", "");
-                    double parsed = (Double.parseDouble(cleanString) / 100);
-
-                    String parsedString = mContext.get().getResources().getString(R.string.money_pattern, parsed);
-                    String floatBalancePart = parsedString.split(parsedString.contains(",") ? "," : "\\.")[1];
-
-                    NumberFormat formatter = new DecimalFormat("#,###");
-                    String formattedBalance = formatter.format((int) parsed).replaceAll(",", ".") + "," + floatBalancePart;
-
-                    formattedText = mContext.get().getResources().getString(R.string.money_real_pattern, formattedBalance);
-                    mCurrentText = formattedText;
-
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace();
-                }
+                double parsed = Utils.parseMoneyStringToDouble(s.toString());
+                formattedText = Utils.prettyMoneyFormat(mContext.get(), parsed);
+                mCurrentText = formattedText;
             }
 
             mEditText.setText(formattedText);

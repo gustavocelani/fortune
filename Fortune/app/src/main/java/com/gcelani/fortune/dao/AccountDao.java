@@ -16,7 +16,7 @@ import java.util.List;
 public interface AccountDao {
 
     @Query("SELECT * FROM accounts")
-    List<Account> getAll();
+    List<Account> findAll();
 
     @Query("SELECT * FROM accounts WHERE id IN (:ids)")
     List<Account> loadAllByIds(int[] ids);

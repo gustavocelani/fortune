@@ -55,4 +55,7 @@
     <string name="money_pattern">%.2f</string>
     <string name="money_real_pattern">R$ %s</string>
 
+    <!-- Empty Messages -->
+    <string name="empty_accounts_message">Create your first account!\nStart to manage your finances!</string>
+
 </resources>

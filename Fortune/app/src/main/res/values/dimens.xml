@@ -23,4 +23,8 @@
     <dimen name="big_text_size">22sp</dimen>
     <dimen name="giant_text_size">42sp</dimen>
 
+    <!-- List -->
+    <dimen name="account_list_row_height">70dp</dimen>
+    <dimen name="account_list_half_row_height">35dp</dimen>
+
 </resources>
