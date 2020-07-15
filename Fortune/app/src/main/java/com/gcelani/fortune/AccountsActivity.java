@@ -1,11 +1,16 @@
 package com.gcelani.fortune;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -13,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -48,8 +55,8 @@ public class AccountsActivity extends AppCompatActivity {
     /** AppDatabase */
     private AppDatabase mAppDatabase;
 
-    /** EditingID */
-    private int mEditingId;
+    /** EditingAccount */
+    private Account mEditingAccount;
 
     /**
      * onCreate
@@ -69,34 +76,57 @@ public class AccountsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        mAppDatabase = Room.databaseBuilder(this, AppDatabase.class, Constants.DB_NAME).allowMainThreadQueries().build();
-        mEditingId = Integer.MIN_VALUE;
+        mAppDatabase = Room.databaseBuilder(
+                this,
+                AppDatabase.class,
+                Constants.DB_NAME)
+                .allowMainThreadQueries()
+                .build();
 
-        initializeUiElementsForNewAccount();
-    }
+        mEditingAccount = getIntent().hasExtra(Constants.ACCOUNT_TAG)
+                ? (Account) getIntent().getSerializableExtra(Constants.ACCOUNT_TAG)
+                : null;
 
-    /**
-     * initializeUiElementsForNewAccount
-     */
-    private void initializeUiElementsForNewAccount() {
         mBalanceEditText = findViewById(R.id.account_balance);
-        mBalanceEditText.addTextChangedListener(new BalanceTextWatcher(this, mBalanceEditText));
-        mBalanceEditText.setText("0");
-
+        mPositiveBalanceSwitch = findViewById(R.id.positive_balance_switch);
         mNameEditText = findViewById(R.id.account_name);
         mIsAvailableCheckBox = findViewById(R.id.account_is_available);
         mIsInvestmentCheckBox = findViewById(R.id.account_is_investment);
         mIsTotalCheckBox = findViewById(R.id.account_is_total);
-
         mAccountTypeSpinner = findViewById(R.id.account_type);
+
+        initializeUiElements();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
+    }
+
+    /**
+     * initializeUiElements
+     */
+    private void initializeUiElements() {
         mAccountTypeSpinner.setAdapter(
                 new ArrayAdapter<>(this,
                         R.layout.support_simple_spinner_dropdown_item,
                         getResources().getStringArray(R.array.account_types)));
 
-        mPositiveBalanceSwitch = findViewById(R.id.positive_balance_switch);
+        mNameEditText.setText(isEditing() ? mEditingAccount.name : "");
+        mAccountTypeSpinner.setSelection(isEditing() ? Utils.getAccountTypeSpinnerPosition(this, mEditingAccount.type) : 0);
+        mIsAvailableCheckBox.setChecked(isEditing() && mEditingAccount.availableGroup);
+        mIsInvestmentCheckBox.setChecked(isEditing() && mEditingAccount.investmentGroup);
+        mIsTotalCheckBox.setChecked(isEditing() && mEditingAccount.totalGroup);
+
+        mBalanceEditText.addTextChangedListener(new BalanceTextWatcher(this, mBalanceEditText));
+        mBalanceEditText.setText(isEditing() ? Utils.prettyMoneyFormat(this, mEditingAccount.balance) : "0");
+
         mPositiveBalanceSwitch.setOnCheckedChangeListener(positiveBalanceSwitchOnCheckedChangeListener);
-        mPositiveBalanceSwitch.setChecked(true);
+        if (mPositiveBalanceSwitch.isChecked() == (!isEditing() || mEditingAccount.positiveBalance)) {
+            mPositiveBalanceSwitch.setChecked(!(!isEditing() || mEditingAccount.positiveBalance));
+        }
+        mPositiveBalanceSwitch.setChecked(!isEditing() || mEditingAccount.positiveBalance);
     }
 
     /**
@@ -110,6 +140,7 @@ public class AccountsActivity extends AppCompatActivity {
             mPositiveBalanceSwitch.getThumbDrawable().setColorFilter(newColor, PorterDuff.Mode.MULTIPLY);
             mBalanceEditText.setTextColor(newColor);
             mNameEditText.getBackground().setColorFilter(newColor, PorterDuff.Mode.SRC_IN);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mIsAvailableCheckBox.setButtonTintList(ColorStateList.valueOf(newColor));
                 mIsInvestmentCheckBox.setButtonTintList(ColorStateList.valueOf(newColor));
@@ -125,20 +156,54 @@ public class AccountsActivity extends AppCompatActivity {
      */
     private void saveAccount() {
         Account account = new Account();
-        if (isEditing()) {
-            account.id = mEditingId;
-        }
 
         account.balance = Utils.parseMoneyStringToDouble(mBalanceEditText.getText().toString());
         account.positiveBalance = mPositiveBalanceSwitch.isChecked();
         account.name = mNameEditText.getText().toString();
         account.type = mAccountTypeSpinner.getSelectedItem().toString();
-        account.available = mIsAvailableCheckBox.isChecked();
-        account.investment = mIsInvestmentCheckBox.isChecked();
-        account.total = mIsTotalCheckBox.isChecked();
+        account.availableGroup = mIsAvailableCheckBox.isChecked();
+        account.investmentGroup = mIsInvestmentCheckBox.isChecked();
+        account.totalGroup = mIsTotalCheckBox.isChecked();
 
-        mAppDatabase.accountDao().insertAll(account);
+        if (isEditing()) {
+            account.id = mEditingAccount.id;
+            mAppDatabase.accountDao().update(account);
+        } else {
+            mAppDatabase.accountDao().insertAll(account);
+        }
+
         finish();
+    }
+
+    /**
+     * deleteAccount
+     */
+    private void deleteAccount() {
+        if (isEditing()) {
+            final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_delete)
+                    .setTitle(getResources().getString(R.string.account_delete_confirm_title))
+                    .setMessage(getResources().getString(R.string.confirm_question))
+                    .setPositiveButton(getResources().getString(R.string.yes_text), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mAppDatabase.accountDao().delete(mEditingAccount);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(getResources().getString(R.string.no_text), null)
+                    .create();
+
+            alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.white));
+                    alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.white));
+                }
+            });
+
+            alertDialog.show();
+        }
     }
 
     /**
@@ -158,9 +223,7 @@ public class AccountsActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_delete:
-                break;
-
-            default:
+                deleteAccount();
                 break;
         }
 
@@ -175,6 +238,7 @@ public class AccountsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.accounts, menu);
+        menu.findItem(R.id.action_delete).setVisible(isEditing());
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -183,6 +247,6 @@ public class AccountsActivity extends AppCompatActivity {
      * @return True if is editing
      */
     private boolean isEditing() {
-        return mEditingId != Integer.MIN_VALUE;
+        return mEditingAccount != null;
     }
 }

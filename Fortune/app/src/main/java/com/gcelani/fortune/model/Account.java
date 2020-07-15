@@ -4,11 +4,15 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.gcelani.fortune.utils.Constants;
+
+import java.io.Serializable;
+
 /**
  * Account
  */
-@Entity(tableName = "accounts")
-public class Account {
+@Entity(tableName = Constants.ACCOUNTS_TABLE_NAME)
+public class Account implements Serializable {
 
     /** UID */
     @PrimaryKey(autoGenerate = true)
@@ -23,7 +27,7 @@ public class Account {
     public double balance;
 
     /** isPositiveBalance */
-    @ColumnInfo(name = "positiveBalance")
+    @ColumnInfo(name = "isPositiveBalance")
     public boolean positiveBalance;
 
     /** Type */
@@ -31,14 +35,14 @@ public class Account {
     public String type;
 
     /** isInvestment */
-    @ColumnInfo(name = "investment")
-    public boolean investment;
+    @ColumnInfo(name = "isInvestmentGroup")
+    public boolean investmentGroup;
 
     /** isAvailable */
-    @ColumnInfo(name = "available")
-    public boolean available;
+    @ColumnInfo(name = "isAvailableGroup")
+    public boolean availableGroup;
 
     /** isTotal */
-    @ColumnInfo(name = "total")
-    public boolean total;
+    @ColumnInfo(name = "isTotalGroup")
+    public boolean totalGroup;
 }

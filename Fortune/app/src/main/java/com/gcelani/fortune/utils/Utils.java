@@ -1,6 +1,8 @@
 package com.gcelani.fortune.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import com.gcelani.fortune.R;
 
@@ -50,6 +52,7 @@ public class Utils {
 
     /**
      * getIconFromAccountType
+     * @param context context
      * @param accountType accountType
      * @return Icon ID
      */
@@ -72,5 +75,22 @@ public class Utils {
         }
 
         return R.drawable.ic_other;
+    }
+
+    /**
+     * getAccountTypeSpinnerPosition
+     * @param context context
+     * @param accountType accountType
+     * @return Account Type Spinner Position
+     */
+    public static int getAccountTypeSpinnerPosition(Context context, String accountType) {
+        String[] accountTypes = context.getResources().getStringArray(R.array.account_types);
+        List<String> accountTypesArrayList = new ArrayList<>(Arrays.asList(accountTypes));
+
+        if (accountTypesArrayList.indexOf(accountType) >= 0) {
+            return accountTypesArrayList.indexOf(accountType);
+        }
+
+        return accountTypes.length - 1;
     }
 }

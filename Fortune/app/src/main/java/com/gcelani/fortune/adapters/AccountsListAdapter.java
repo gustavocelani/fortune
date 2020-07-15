@@ -2,6 +2,7 @@ package com.gcelani.fortune.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,13 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.gcelani.fortune.AccountsActivity;
 import com.gcelani.fortune.R;
 import com.gcelani.fortune.model.Account;
+import com.gcelani.fortune.utils.Constants;
 import com.gcelani.fortune.utils.Utils;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -80,9 +84,10 @@ public class AccountsListAdapter implements ListAdapter {
      */
     private View.OnClickListener onItemClickListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-            // TODO: Call AccountActivity in edit mode
-            System.out.println(v.getTag());
+        public void onClick(View view) {
+            Intent intent = new Intent(mContext.get(), AccountsActivity.class);
+            intent.putExtra(Constants.ACCOUNT_TAG, (Serializable) view.getTag());
+            mContext.get().startActivity(intent);
         }
     };
 
