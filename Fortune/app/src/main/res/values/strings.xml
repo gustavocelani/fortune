@@ -40,7 +40,7 @@
     <string name="account_is_available">Add to Available Group</string>
     <string name="account_is_total">Add to Total Group</string>
     <string name="account_name_hint">My Favorite Bank</string>
-    <string name="account_explanation_text">You can create as many accounts as you want\nAn account can be considered any means you use to store your income</string>
+    <string name="account_explanation_text">You can create as many accounts as you want\nAn account can be considered any means that you use to store your income</string>
     <string-array name="account_types">
         <item>Money</item>
         <item>Current Account</item>

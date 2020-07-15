@@ -55,7 +55,7 @@ public class BalanceTextWatcher implements TextWatcher {
                     double parsed = (Double.parseDouble(cleanString) / 100);
 
                     String parsedString = mContext.get().getResources().getString(R.string.money_pattern, parsed);
-                    String floatBalancePart = parsedString.split(",")[1];
+                    String floatBalancePart = parsedString.split(parsedString.contains(",") ? "," : "\\.")[1];
 
                     NumberFormat formatter = new DecimalFormat("#,###");
                     String formattedBalance = formatter.format((int) parsed).replaceAll(",", ".") + "," + floatBalancePart;
