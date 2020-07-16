@@ -7,6 +7,7 @@ public class Constants {
 
     /** General */
     public static final String APP_VERSION = "0.0.1";
+    public static final    int AUTHENTICATION_INTENT_REQUEST_CODE = 1000;
 
     /** DataBase */
     public static final String DB_NAME = "fortune_db_1.0";

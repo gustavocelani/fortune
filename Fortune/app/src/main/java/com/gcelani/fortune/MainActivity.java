@@ -1,5 +1,7 @@
 package com.gcelani.fortune;
 
+import android.app.KeyguardManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -62,8 +64,44 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-         mAppDatabase = Room.databaseBuilder(this, AppDatabase.class, Constants.DB_NAME).allowMainThreadQueries().build();
-         // Usage: ((MainActivity) getActivity()).getAppDatabase().accountDao().insertAll(accounts);
+        mAppDatabase = Room.databaseBuilder(
+                this,
+                AppDatabase.class,
+                Constants.DB_NAME)
+                .allowMainThreadQueries()
+                .build();
+
+        requestAuthentication();
+    }
+
+    /**
+     * requestAuthentication
+     */
+    private void requestAuthentication() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+
+            if (keyguardManager.isKeyguardSecure()) {
+                Intent authenticationIntent = keyguardManager.createConfirmDeviceCredentialIntent(
+                        getString(R.string.app_name),
+                        getString(R.string.authentication_request_message));
+                startActivityForResult(authenticationIntent, Constants.AUTHENTICATION_INTENT_REQUEST_CODE);
+            }
+        }
+    }
+
+    /**
+     * onActivityResult
+     * @param requestCode requestCode
+     * @param resultCode resultCode
+     * @param data data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.AUTHENTICATION_INTENT_REQUEST_CODE && resultCode != RESULT_OK) {
+            finish();
+        }
     }
 
     /**

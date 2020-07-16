@@ -3,6 +3,9 @@
     <!-- App Name-->
     <string name="app_name">Fortune</string>
 
+    <!-- Authentication -->
+    <string name="authentication_request_message">Authenticate to continue</string>
+
     <!-- Navigation Menu -->
     <string name="menu_home">Home</string>
     <string name="menu_accounts">Accounts</string>
