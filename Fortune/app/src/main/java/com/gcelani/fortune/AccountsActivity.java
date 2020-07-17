@@ -125,10 +125,8 @@ public class AccountsActivity extends AppCompatActivity {
         mBalanceEditText.setText(isEditing() ? Utils.prettyMoneyFormat(this, mEditingAccount.balance) : "0");
 
         mPositiveBalanceSwitch.setOnCheckedChangeListener(positiveBalanceSwitchOnCheckedChangeListener);
-        if (mPositiveBalanceSwitch.isChecked() == (!isEditing() || mEditingAccount.positiveBalance)) {
-            mPositiveBalanceSwitch.setChecked(!(!isEditing() || mEditingAccount.positiveBalance));
-        }
         mPositiveBalanceSwitch.setChecked(!isEditing() || mEditingAccount.positiveBalance);
+        updateUiColor(!isEditing() || mEditingAccount.positiveBalance);
     }
 
     /**
@@ -138,18 +136,26 @@ public class AccountsActivity extends AppCompatActivity {
             new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-            int newColor = getResources().getColor(isChecked ? R.color.green : R.color.red);
-            mPositiveBalanceSwitch.getThumbDrawable().setColorFilter(newColor, PorterDuff.Mode.MULTIPLY);
-            mBalanceEditText.setTextColor(newColor);
-            mNameEditText.getBackground().setColorFilter(newColor, PorterDuff.Mode.SRC_IN);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mIsAvailableCheckBox.setButtonTintList(ColorStateList.valueOf(newColor));
-                mIsInvestmentCheckBox.setButtonTintList(ColorStateList.valueOf(newColor));
-                mIsTotalCheckBox.setButtonTintList(ColorStateList.valueOf(newColor));
-            }
+            updateUiColor(isChecked);
         }
     };
+
+    /**
+     * updateUiColor
+     * @param isEditing isEditing
+     */
+    private void updateUiColor(boolean isEditing) {
+        int color = getResources().getColor(isEditing ? R.color.green : R.color.red);
+        mPositiveBalanceSwitch.getThumbDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+        mBalanceEditText.setTextColor(color);
+        mNameEditText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mIsAvailableCheckBox.setButtonTintList(ColorStateList.valueOf(color));
+            mIsInvestmentCheckBox.setButtonTintList(ColorStateList.valueOf(color));
+            mIsTotalCheckBox.setButtonTintList(ColorStateList.valueOf(color));
+        }
+    }
 
     /**
      * saveAccount
