@@ -31,9 +31,9 @@ public class Account implements Serializable {
     @ColumnInfo(name = "isPositiveBalance")
     public boolean positiveBalance;
 
-    /** Type */
-    @ColumnInfo(name = "type")
-    public String type;
+    /** Category */
+    @ColumnInfo(name = "category")
+    public String category;
 
     /** isInvestment */
     @ColumnInfo(name = "isInvestmentGroup")

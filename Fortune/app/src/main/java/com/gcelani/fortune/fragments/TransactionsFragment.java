@@ -2,6 +2,7 @@ package com.gcelani.fortune.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gcelani.fortune.R;
+import com.gcelani.fortune.activities.TransactionsActivity;
 import com.gcelani.fortune.view.FabAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -175,7 +177,8 @@ public class TransactionsFragment extends Fragment {
     private View.OnClickListener fabTransactionOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "Transaction", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Intent intent = new Intent(getActivity(), TransactionsActivity.class);
+            startActivity(intent);
         }
     };
 

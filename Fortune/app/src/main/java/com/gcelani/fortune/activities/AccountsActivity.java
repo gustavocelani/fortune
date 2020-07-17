@@ -85,6 +85,13 @@ public class AccountsActivity extends AppCompatActivity {
                 ? (Account) getIntent().getSerializableExtra(Constants.ACCOUNT_TAG)
                 : null;
 
+        initializeUiElements();
+    }
+
+    /**
+     * initializeUiElements
+     */
+    private void initializeUiElements() {
         mBalanceEditText = findViewById(R.id.account_balance);
         mPositiveBalanceSwitch = findViewById(R.id.positive_balance_switch);
         mNameEditText = findViewById(R.id.account_name);
@@ -93,20 +100,13 @@ public class AccountsActivity extends AppCompatActivity {
         mIsTotalCheckBox = findViewById(R.id.account_is_total);
         mAccountTypeSpinner = findViewById(R.id.account_type);
 
-        initializeUiElements();
-    }
-
-    /**
-     * initializeUiElements
-     */
-    private void initializeUiElements() {
         mAccountTypeSpinner.setAdapter(
                 new ArrayAdapter<>(this,
                         R.layout.support_simple_spinner_dropdown_item,
                         getResources().getStringArray(R.array.account_types)));
 
         mNameEditText.setText(isEditing() ? mEditingAccount.name : "");
-        mAccountTypeSpinner.setSelection(isEditing() ? Utils.getAccountTypeSpinnerPosition(this, mEditingAccount.type) : 0);
+        mAccountTypeSpinner.setSelection(isEditing() ? Utils.getAccountTypeSpinnerPosition(this, mEditingAccount.category) : 0);
         mIsAvailableCheckBox.setChecked(isEditing() && mEditingAccount.availableGroup);
         mIsInvestmentCheckBox.setChecked(isEditing() && mEditingAccount.investmentGroup);
         mIsTotalCheckBox.setChecked(isEditing() && mEditingAccount.totalGroup);
@@ -158,7 +158,7 @@ public class AccountsActivity extends AppCompatActivity {
         account.balance = Utils.parseMoneyStringToDouble(mBalanceEditText.getText().toString());
         account.positiveBalance = mPositiveBalanceSwitch.isChecked();
         account.name = mNameEditText.getText().toString().trim();
-        account.type = mAccountTypeSpinner.getSelectedItem().toString();
+        account.category = mAccountTypeSpinner.getSelectedItem().toString();
         account.availableGroup = mIsAvailableCheckBox.isChecked();
         account.investmentGroup = mIsInvestmentCheckBox.isChecked();
         account.totalGroup = mIsTotalCheckBox.isChecked();
@@ -254,7 +254,7 @@ public class AccountsActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.accounts, menu);
+        getMenuInflater().inflate(R.menu.save_delete, menu);
         menu.findItem(R.id.action_delete).setVisible(isEditing());
         return super.onCreateOptionsMenu(menu);
     }

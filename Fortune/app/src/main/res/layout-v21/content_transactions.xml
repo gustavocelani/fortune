@@ -17,13 +17,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/balance_text"
+            android:text="@string/value_text"
             android:textColor="@color/light_gray"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/default_margin"
             tools:ignore="MissingConstraints" />
         <EditText
-            android:id="@+id/account_balance"
+            android:id="@+id/value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -40,33 +40,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/source_account_spinner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/mid_text_size"
+                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin" />
+
+            <ImageView
+                android:id="@+id/arrow_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/negative_text"
-                android:textColor="@color/light_gray"
-                tools:ignore="MissingConstraints" />
-
-            <Switch
-                android:id="@+id/positive_balance_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_half_margin"
+                android:layout_marginBottom="@dimen/default_half_margin"
+                android:src="@drawable/ic_arrow_downward"
                 android:layout_marginStart="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@string/positive_text"
-                android:textColor="@color/light_gray"
-                tools:ignore="MissingConstraints" />
+                android:contentDescription="@string/app_name" />
+
+            <Spinner
+                android:id="@+id/target_account_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/mid_text_size"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin" />
 
         </LinearLayout>
 
@@ -78,11 +83,11 @@
             android:textColor="@color/light_gray"
             tools:ignore="MissingConstraints" />
         <EditText
-            android:id="@+id/account_name"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/mid_text_size"
             android:layout_marginBottom="@dimen/default_margin"
+            android:textSize="@dimen/mid_text_size"
             android:inputType="textCapWords"
             android:autofillHints="@string/account_name_hint"
             tools:ignore="LabelFor" />
@@ -90,46 +95,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_text"
-            android:textColor="@color/light_gray"
             android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/description_text"
+            android:textColor="@color/light_gray"
             tools:ignore="MissingConstraints" />
-        <Spinner
-            android:id="@+id/account_type"
+        <EditText
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/mid_text_size"
-            android:layout_marginBottom="@dimen/default_margin" />
-
-        <CheckBox
-            android:id="@+id/account_is_available"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/light_gray"
-            android:textSize="@dimen/mid_text_size"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/account_is_available" />
-        <CheckBox
-            android:id="@+id/account_is_investment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/light_gray"
-            android:textSize="@dimen/mid_text_size"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/account_is_investment" />
-        <CheckBox
-            android:id="@+id/account_is_total"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/light_gray"
-            android:textSize="@dimen/mid_text_size"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/account_is_total" />
+            android:autofillHints="@string/account_name_hint"
+            android:layout_marginBottom="@dimen/default_margin"
+            tools:ignore="LabelFor"
+            android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/account_explanation_text"
+            android:text="@string/transaction_explanation_text"
             android:layout_gravity="bottom|center"
             android:gravity="bottom|center"
             android:textColor="@color/light_gray"

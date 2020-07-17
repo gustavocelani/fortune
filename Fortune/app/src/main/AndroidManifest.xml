@@ -16,6 +16,12 @@
         tools:ignore="AllowBackup">
 
         <activity
+            android:name=".activities.TransactionsActivity"
+            android:label="@string/menu_transactions"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
             android:name=".activities.AccountsActivity"
             android:label="@string/menu_accounts"
             android:screenOrientation="portrait"

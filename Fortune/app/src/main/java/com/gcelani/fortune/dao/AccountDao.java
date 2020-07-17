@@ -17,6 +17,9 @@ import java.util.List;
 @Dao
 public interface AccountDao {
 
+    @Query("SELECT name FROM " + Constants.ACCOUNTS_TABLE_NAME)
+    String[] getAccountNames();
+
     @Query("SELECT * FROM " + Constants.ACCOUNTS_TABLE_NAME)
     List<Account> findAll();
 

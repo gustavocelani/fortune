@@ -35,7 +35,7 @@ public class AccountsListAdapter implements ListAdapter {
     /**
      * AccountsListAdapter
      * @param context context
-     * @param accounts accounts
+     * @param accounts save_delete
      */
     public AccountsListAdapter(Context context, List<Account> accounts) {
         this.mContext = new WeakReference<>(context);
@@ -64,9 +64,9 @@ public class AccountsListAdapter implements ListAdapter {
             TextView accountTypeTextView = convertView.findViewById(R.id.account_type);
             TextView accountBalanceTextView = convertView.findViewById(R.id.account_balance);
 
-            iconImageView.setImageDrawable(mContext.get().getResources().getDrawable(Utils.getIconFromAccountType(mContext.get(), account.type)));
+            iconImageView.setImageDrawable(mContext.get().getResources().getDrawable(Utils.getIconFromAccountType(mContext.get(), account.category)));
             accountNameTextView.setText(account.name);
-            accountTypeTextView.setText(account.type);
+            accountTypeTextView.setText(account.category);
             accountBalanceTextView.setText(Utils.prettyMoneyFormat(mContext.get(), account.balance));
 
             int newColor = account.positiveBalance ? R.color.green : R.color.red;

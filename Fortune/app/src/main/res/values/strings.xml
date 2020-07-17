@@ -6,6 +6,16 @@
     <!-- Authentication -->
     <string name="authentication_request_message">Authenticate to continue</string>
 
+    <!-- General -->
+    <string name="balance_text">Balance</string>
+    <string name="value_text">Value</string>
+    <string name="positive_text">Positive</string>
+    <string name="negative_text">Negative</string>
+    <string name="name_text">Name</string>
+    <string name="type_text">Type</string>
+    <string name="category_text">Category</string>
+    <string name="description_text">Description</string>
+
     <!-- Navigation Menu -->
     <string name="menu_home">Home</string>
     <string name="menu_accounts">Accounts</string>
@@ -34,11 +44,6 @@
     <string name="revenue_text">Revenue</string>
 
     <!-- Accounts Activity -->
-    <string name="account_balance">Balance</string>
-    <string name="account_positive_balance">Positive</string>
-    <string name="account_negative_balance">Negative</string>
-    <string name="account_name">Name</string>
-    <string name="account_type">Type</string>
     <string name="account_is_investment">Add to Investment Group</string>
     <string name="account_is_available">Add to Available Group</string>
     <string name="account_is_total">Add to Total Group</string>
@@ -78,5 +83,9 @@
         <item>English</item>
         <item>Portuguese</item>
     </string-array>
+
+    <!-- Transactions Activity -->
+    <string name="empty_accounts">You need more accounts!</string>
+    <string name="transaction_explanation_text">Perform transactions between your accounts</string>
 
 </resources>
