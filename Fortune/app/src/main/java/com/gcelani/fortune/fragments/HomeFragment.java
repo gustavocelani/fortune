@@ -149,4 +149,18 @@ public class HomeFragment extends Fragment {
             FabAnimation.showOut(mFabTransactionLayout);
         }
     }
+
+    /**
+     * onResume
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isFabRotate) {
+            isFabRotate = FabAnimation.rotateFab(mFabMain, false);
+            FabAnimation.showOut(mFabRevenueLayout);
+            FabAnimation.showOut(mFabExpenseLayout);
+            FabAnimation.showOut(mFabTransactionLayout);
+        }
+    }
 }
