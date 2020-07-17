@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gcelani.fortune.R;
-import com.gcelani.fortune.view.ViewAnimation;
+import com.gcelani.fortune.view.FabAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -104,16 +104,16 @@ public class TransactionsFragment extends Fragment {
     private View.OnClickListener fabMainOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            isFabRotate = ViewAnimation.rotateFab(view, !isFabRotate);
+            isFabRotate = FabAnimation.rotateFab(view, !isFabRotate);
 
             if(isFabRotate) {
-                ViewAnimation.showIn(mFabRevenueLayout);
-                ViewAnimation.showIn(mFabExpenseLayout);
-                ViewAnimation.showIn(mFabTransactionLayout);
+                FabAnimation.showIn(mFabRevenueLayout);
+                FabAnimation.showIn(mFabExpenseLayout);
+                FabAnimation.showIn(mFabTransactionLayout);
             } else {
-                ViewAnimation.showOut(mFabRevenueLayout);
-                ViewAnimation.showOut(mFabExpenseLayout);
-                ViewAnimation.showOut(mFabTransactionLayout);
+                FabAnimation.showOut(mFabRevenueLayout);
+                FabAnimation.showOut(mFabExpenseLayout);
+                FabAnimation.showOut(mFabTransactionLayout);
             }
         }
     };
@@ -155,10 +155,10 @@ public class TransactionsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         if (isFabRotate) {
-            isFabRotate = ViewAnimation.rotateFab(mFabMain, false);
-            ViewAnimation.showOut(mFabRevenueLayout);
-            ViewAnimation.showOut(mFabExpenseLayout);
-            ViewAnimation.showOut(mFabTransactionLayout);
+            isFabRotate = FabAnimation.rotateFab(mFabMain, false);
+            FabAnimation.showOut(mFabRevenueLayout);
+            FabAnimation.showOut(mFabExpenseLayout);
+            FabAnimation.showOut(mFabTransactionLayout);
         }
     }
 }

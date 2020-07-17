@@ -5,9 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.view.View;
 
 /**
- * ViewAnimation
+ * FabAnimation
  */
-public class ViewAnimation {
+public class FabAnimation {
 
     /**
      * init

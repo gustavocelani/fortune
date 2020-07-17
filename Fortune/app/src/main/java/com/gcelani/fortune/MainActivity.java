@@ -19,7 +19,7 @@ import com.gcelani.fortune.database.AppDatabase;
 import com.gcelani.fortune.model.Settings;
 import com.gcelani.fortune.utils.Constants;
 import com.gcelani.fortune.utils.Utils;
-import com.gcelani.fortune.view.ViewAnimation;
+import com.gcelani.fortune.view.FabAnimation;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewAnimation.init(findViewById(R.id.fab_revenue_layout));
-        ViewAnimation.init(findViewById(R.id.fab_expense_layout));
-        ViewAnimation.init(findViewById(R.id.fab_transaction_layout));
+        FabAnimation.init(findViewById(R.id.fab_revenue_layout));
+        FabAnimation.init(findViewById(R.id.fab_expense_layout));
+        FabAnimation.init(findViewById(R.id.fab_transaction_layout));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
