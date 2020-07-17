@@ -8,6 +8,7 @@ import com.gcelani.fortune.dao.AccountDao;
 import com.gcelani.fortune.dao.SettingsDao;
 import com.gcelani.fortune.model.Account;
 import com.gcelani.fortune.model.Settings;
+import com.gcelani.fortune.model.Transaction;
 
 /**
  * AppDatabase
@@ -16,7 +17,8 @@ import com.gcelani.fortune.model.Settings;
 @Database(
         entities = {
                 Account.class,
-                Settings.class
+                Settings.class,
+                Transaction.class
         },
         version = 1)
 @TypeConverters({Converters.class})
