@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gcelani.fortune.activities.AccountsActivity;
-import com.gcelani.fortune.MainActivity;
+import com.gcelani.fortune.activities.MainActivity;
 import com.gcelani.fortune.R;
 import com.gcelani.fortune.adapters.AccountsListAdapter;
 import com.gcelani.fortune.model.Account;

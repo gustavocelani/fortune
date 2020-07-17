@@ -17,7 +17,7 @@ import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.gcelani.fortune.MainActivity;
+import com.gcelani.fortune.activities.MainActivity;
 import com.gcelani.fortune.R;
 import com.gcelani.fortune.model.Settings;
 import com.gcelani.fortune.utils.Constants;

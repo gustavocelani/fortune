@@ -1,4 +1,4 @@
-package com.gcelani.fortune;
+package com.gcelani.fortune.activities;
 
 import android.app.KeyguardManager;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
+import com.gcelani.fortune.R;
 import com.gcelani.fortune.database.AppDatabase;
 import com.gcelani.fortune.model.Settings;
 import com.gcelani.fortune.utils.Constants;
