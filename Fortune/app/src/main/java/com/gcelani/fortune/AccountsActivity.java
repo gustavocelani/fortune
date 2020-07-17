@@ -31,6 +31,8 @@ import com.gcelani.fortune.utils.BalanceTextWatcher;
 import com.gcelani.fortune.utils.Constants;
 import com.gcelani.fortune.utils.Utils;
 
+import java.util.Date;
+
 /**
  * AccountActivity
  * extends AppCompatActivity
@@ -150,7 +152,7 @@ public class AccountsActivity extends AppCompatActivity {
     };
 
     /**
-     * updateAccount
+     * saveAccount
      * Create Account object
      * Save/Update Account object on DB
      */
@@ -187,6 +189,7 @@ public class AccountsActivity extends AppCompatActivity {
             account.id = mEditingAccount.id;
             mAppDatabase.accountDao().update(account);
         } else {
+            account.createdAt = new Date();
             mAppDatabase.accountDao().insertAll(account);
         }
 

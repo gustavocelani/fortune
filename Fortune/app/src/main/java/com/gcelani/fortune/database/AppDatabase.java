@@ -2,6 +2,7 @@ package com.gcelani.fortune.database;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.gcelani.fortune.dao.AccountDao;
 import com.gcelani.fortune.dao.SettingsDao;
@@ -18,6 +19,7 @@ import com.gcelani.fortune.model.Settings;
                 Settings.class
         },
         version = 1)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     /** AccountDao */

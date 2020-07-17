@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import com.gcelani.fortune.utils.Constants;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Account
@@ -45,6 +46,10 @@ public class Account implements Serializable {
     /** isTotal */
     @ColumnInfo(name = "isTotalGroup")
     public boolean totalGroup;
+
+    /** CreatedAt */
+    @ColumnInfo(name = "createdAt")
+    public Date createdAt;
 
     /**
      * isValid
