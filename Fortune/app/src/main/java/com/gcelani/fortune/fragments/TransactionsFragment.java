@@ -1,6 +1,7 @@
 package com.gcelani.fortune.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,7 +9,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,6 +38,9 @@ public class TransactionsFragment extends Fragment {
     private LinearLayout mFabExpenseLayout;
     /** FabTransaction */
     private LinearLayout mFabTransactionLayout;
+
+    /** Navigation DatePicker */
+    private TextView mNavDatePickerTextView;
 
     /**
      * onCreateView
@@ -66,8 +72,33 @@ public class TransactionsFragment extends Fragment {
             mFabMain.setOnClickListener(fabMainOnClickListener);
         }
 
+        mNavDatePickerTextView = rootView.findViewById(R.id.nav_date_picker);
+        mNavDatePickerTextView.setOnClickListener(onNavDataPickerClick);
+
         return rootView;
     }
+
+    /**
+     * onNavDataPickerClick
+     */
+    private View.OnClickListener onNavDataPickerClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    getActivity(),
+                    onDateSetListener,
+                    2020, 7, 17);
+
+            datePickerDialog.show();
+        }
+
+        private DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mNavDatePickerTextView.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+            }
+        };
+    };
 
     /**
      * onCreateOptionsMenu

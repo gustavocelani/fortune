@@ -7,4 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TransactionsFragment">
 
+    <TextView
+        android:id="@+id/nav_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_date_picker_height"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@color/primary"
+        android:textColor="@color/white"
+        android:textSize="@dimen/mid_text_size"
+        android:text="Thu, 21, 2020"
+        android:layout_alignParentTop="true" />
+
 </RelativeLayout>
