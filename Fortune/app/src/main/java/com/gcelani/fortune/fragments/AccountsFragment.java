@@ -14,7 +14,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.gcelani.fortune.AccountsActivity;
+import com.gcelani.fortune.activities.AccountsActivity;
 import com.gcelani.fortune.MainActivity;
 import com.gcelani.fortune.R;
 import com.gcelani.fortune.adapters.AccountsListAdapter;

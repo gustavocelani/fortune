@@ -1,16 +1,13 @@
-package com.gcelani.fortune;
+package com.gcelani.fortune.activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,13 +15,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
+import com.gcelani.fortune.R;
 import com.gcelani.fortune.database.AppDatabase;
 import com.gcelani.fortune.model.Account;
 import com.gcelani.fortune.utils.BalanceTextWatcher;
@@ -98,12 +94,6 @@ public class AccountsActivity extends AppCompatActivity {
         mAccountTypeSpinner = findViewById(R.id.account_type);
 
         initializeUiElements();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        return super.onCreateView(name, context, attrs);
     }
 
     /**

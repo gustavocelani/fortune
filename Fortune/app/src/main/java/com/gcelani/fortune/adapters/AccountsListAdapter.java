@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.gcelani.fortune.AccountsActivity;
+import com.gcelani.fortune.activities.AccountsActivity;
 import com.gcelani.fortune.R;
 import com.gcelani.fortune.model.Account;
 import com.gcelani.fortune.utils.Constants;

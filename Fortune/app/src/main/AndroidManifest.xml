@@ -16,7 +16,7 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".AccountsActivity"
+            android:name=".activities.AccountsActivity"
             android:label="@string/menu_accounts"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
