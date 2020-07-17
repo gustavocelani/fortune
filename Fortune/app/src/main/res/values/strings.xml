@@ -70,4 +70,13 @@
     <string name="confirm_question">\nAre you sure?</string>
     <string name="invalid_data_message">\nPlease, confirm the input fields info</string>
 
+    <!-- Settings Fragment -->
+    <string name="settings_language">Language</string>
+    <string name="settings_authenticate">Request Authentication</string>
+    <string name="settings_explanation_text">Your choices will be persistent automatically</string>
+    <string-array name="languages">
+        <item>English</item>
+        <item>Portuguese</item>
+    </string-array>
+
 </resources>

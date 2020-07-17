@@ -12,6 +12,8 @@ public class Constants {
     /** DataBase */
     public static final String DB_NAME = "fortune_db_1.0";
     public static final String ACCOUNTS_TABLE_NAME = "accounts";
+    public static final String SETTINGS_TABLE_NAME = "settings";
+    public static final    int SETTINGS_TABLE_ID   = 5132166;
 
     /** Accounts */
     public static final String ACCOUNT_TAG = "account";

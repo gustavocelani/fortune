@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.gcelani.fortune.R;
+import com.gcelani.fortune.model.Settings;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -92,5 +93,30 @@ public class Utils {
         }
 
         return accountTypes.length - 1;
+    }
+
+    /**
+     * getLanguageSpinnerPosition
+     * @param context context
+     * @param language language
+     * @return Language Spinner Position
+     */
+    public static int getLanguageSpinnerPosition(Context context, String language) {
+        String[] languages = context.getResources().getStringArray(R.array.languages);
+        List<String> languagesArrayList = new ArrayList<>(Arrays.asList(languages));
+        return Math.max(languagesArrayList.indexOf(language), 0);
+    }
+
+    /**
+     * generateDefaultSettings
+     * @param context context
+     * @return Default settings
+     */
+    public static Settings generateDefaultSettings(Context context) {
+        Settings defaultSettings = new Settings();
+        defaultSettings.id = Constants.SETTINGS_TABLE_ID;
+        defaultSettings.language = context.getResources().getStringArray(R.array.languages)[0];
+        defaultSettings.isAuthenticate = false;
+        return defaultSettings;
     }
 }

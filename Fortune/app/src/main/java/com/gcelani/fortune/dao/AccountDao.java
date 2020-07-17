@@ -20,12 +20,6 @@ public interface AccountDao {
     @Query("SELECT * FROM " + Constants.ACCOUNTS_TABLE_NAME)
     List<Account> findAll();
 
-    @Query("SELECT * FROM " + Constants.ACCOUNTS_TABLE_NAME + " WHERE id IN (:ids)")
-    List<Account> loadAllByIds(int[] ids);
-
-    @Query("SELECT * FROM " + Constants.ACCOUNTS_TABLE_NAME + " WHERE id LIKE :id LIMIT 1")
-    Account findById(int id);
-
     @Update
     void update(Account account);
 

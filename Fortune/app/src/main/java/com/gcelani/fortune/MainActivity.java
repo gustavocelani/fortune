@@ -16,7 +16,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
 import com.gcelani.fortune.database.AppDatabase;
+import com.gcelani.fortune.model.Settings;
 import com.gcelani.fortune.utils.Constants;
+import com.gcelani.fortune.utils.Utils;
 import com.gcelani.fortune.view.ViewAnimation;
 import com.google.android.material.navigation.NavigationView;
 
@@ -71,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-        requestAuthentication();
+        Settings settings = mAppDatabase.settingsDao().findById(Constants.SETTINGS_TABLE_ID);
+        if (settings == null) {
+            settings = Utils.generateDefaultSettings(this);
+            mAppDatabase.settingsDao().insertAll(settings);
+        }
+
+        if (settings.isAuthenticate) {
+            requestAuthentication();
+        }
     }
 
     /**
