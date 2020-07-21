@@ -110,6 +110,24 @@
             android:inputType="text" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/date_text"
+            android:textColor="@color/light_gray"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:textSize="@dimen/giant_text_size" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/transaction_explanation_text"

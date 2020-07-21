@@ -1,8 +1,6 @@
 package com.gcelani.fortune.utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 
 import com.gcelani.fortune.R;
 import com.gcelani.fortune.model.Settings;
@@ -11,6 +9,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -118,5 +118,55 @@ public class Utils {
         defaultSettings.language = context.getResources().getStringArray(R.array.languages)[0];
         defaultSettings.isAuthenticate = false;
         return defaultSettings;
+    }
+
+    /**
+     * getCalendar
+     * @param day day
+     * @param month month
+     * @param year year
+     * @return updated calendar object
+     */
+    public static Calendar getCalendar(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+
+        if (day > 0) {
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+        }
+
+        if (month > 0) {
+            calendar.set(Calendar.MONTH, month);
+        }
+
+        if (year > 0) {
+            calendar.set(Calendar.YEAR, year);
+        }
+
+        return calendar;
+    }
+
+    /**
+     * parseDateFormat
+     * DD/MM/YYYY to int[DD, MM, YYYY]
+     * @param dateFormat dateFormat
+     * @return Parsed date
+     */
+    public static int[] parseDateFormat(String dateFormat) {
+        int[] parsedDate;
+        String[] dateFields = dateFormat.split("/");
+
+        try {
+            parsedDate = new int[] {
+                    Integer.parseInt(dateFields[0]),
+                    Integer.parseInt(dateFields[1]),
+                    Integer.parseInt(dateFields[2])
+            };
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+            parsedDate = new int[] {0, 0, 0};
+        }
+
+        return parsedDate;
     }
 }

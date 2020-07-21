@@ -1,13 +1,18 @@
 package com.gcelani.fortune.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -21,11 +26,16 @@ import com.gcelani.fortune.utils.BalanceTextWatcher;
 import com.gcelani.fortune.utils.Constants;
 import com.gcelani.fortune.utils.Utils;
 
+import java.util.Calendar;
+
 /**
  * TransactionsActivity
  * extends AppCompatActivity
  */
 public class TransactionsActivity extends AppCompatActivity {
+
+    /** Activity */
+    private Activity mActivity;
 
     /** ValueEditText */
     private EditText mValueEditText;
@@ -37,6 +47,8 @@ public class TransactionsActivity extends AppCompatActivity {
     private EditText mNameEditText;
     /** DescriptionEditText */
     private EditText mDescriptionEditText;
+    /** DateTextView */
+    private TextView mDateTextView;
 
     /** AppDatabase */
     private AppDatabase mAppDatabase;
@@ -56,6 +68,7 @@ public class TransactionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transactions);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        mActivity = this;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,6 +125,7 @@ public class TransactionsActivity extends AppCompatActivity {
         mTargetAccountSpinner = findViewById(R.id.target_account_spinner);
         mNameEditText = findViewById(R.id.name);
         mDescriptionEditText = findViewById(R.id.description);
+        mDateTextView = findViewById(R.id.date_text_view);
 
         mValueEditText.addTextChangedListener(new BalanceTextWatcher(this, mValueEditText));
         mValueEditText.setText(isEditing() ? Utils.prettyMoneyFormat(this, mEditingTransaction.value) : "0");
@@ -128,7 +142,44 @@ public class TransactionsActivity extends AppCompatActivity {
 
         mNameEditText.setText(isEditing() ? mEditingTransaction.name : "");
         mDescriptionEditText.setText(isEditing() ? mEditingTransaction.description : "");
+
+        Calendar calendar = Utils.getCalendar(0,0,0);
+        mDateTextView.setText(getResources().getString(R.string.date_pattern,
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH)+1,
+                calendar.get(Calendar.YEAR)));
+        mDateTextView.setOnClickListener(onDateClickListener);
     }
+
+    /**
+     * onDateClickListener
+     */
+    private View.OnClickListener onDateClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int[] parsedDate = Utils.parseDateFormat(mDateTextView.getText().toString());
+            Calendar calendar = Utils.getCalendar(0, 0, 0);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    mActivity,
+                    onDateSetListener,
+                    parsedDate[2] > 0 ? parsedDate[2] : calendar.get(Calendar.YEAR),
+                    parsedDate[1] > 0 ? parsedDate[1] : calendar.get(Calendar.MONTH),
+                    parsedDate[0] > 0 ? parsedDate[0] : calendar.get(Calendar.DAY_OF_MONTH));
+
+            datePickerDialog.show();
+        }
+
+        /**
+         * onDateSetListener
+         */
+        private DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mDateTextView.setText(getResources().getString(R.string.date_pattern, dayOfMonth, monthOfYear, year));
+            }
+        };
+    };
 
     /**
      * onOptionsItemSelected
